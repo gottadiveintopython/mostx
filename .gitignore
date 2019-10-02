@@ -2,5 +2,6 @@ __pycache__/
 bin/
 *.pyc
 *.pyo
-
 /.venv/
+/temp/
+/.pytest_cache/

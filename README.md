@@ -1,6 +1,6 @@
 # Mostx : Quiz Generator
 
-以下のようなQuizを自動で作るModuleです。
+以下のような問題を作るmodule。
 
 
 日本語の例
@@ -44,44 +44,18 @@ Which is the slowest one?
 ```python
 import mostx
 
-available_langs = sorted(mostx.langs())
-print(available_langs)  # => ['chinese', 'english', 'japanese', 'korean', ]
+print(sorted(mostx.get_available_langs()))
+# => ['chinese', 'english', 'japanese', 'korean', ]
 
-quiz = mostx.generate_quiz(
-    choices='ABC',
-    n_adjectives=1,
-    lang='english')
-print(quiz)
-# {
-#   'statements': (
-#     'B is slower than A',
-#     'A is faster than C',
-#     'B is faster than C',
-#     Which is the slowest?,
-#   ),
-#   'choices': ('A', 'B', 'C', )
-#   'answer': 'C',
-# }
+qgen = mostx.QuizGenerator(lang='english')
+q = qgen.generate(choices='ABC', n_adjectives=1)
 
-quiz = mostx.generate_quiz(
-    choices=('Onion', 'Cabbage', 'Cucumber', ),
-    n_adjectives=2,
-    lang='english')
-print(quiz)
-# {
-#   'statements': (
-#     'Onion is newer and quieter than Cucumber',
-#     'Cabbage is quieter and newer than Cucumber',
-#     'Cabbage is noisier and older than Onion',
-#     'Which is the noisiest?',
-#   ),
-#   'choices': ('Onion', 'Cabbage', 'Cucumber', ),
-#   'answer': 'Cucumber',
-# }
-
-quiz = mostx.generate_quiz(
-    choices='ABC',
-    n_adjectives=mostx.max_n_adjectives() + 1,
-    lang='english')
-#  !Exception
+for s in q.statements:
+    print(s)
+# B is quieter than A
+# C is quieter than A
+# B is quieter than C
+print(q.question)  # => Which is the noisiest?
+print(tuple(q.choices))  # => ('A', 'B', 'C')
+print(q.answer)  # => A
 ```
