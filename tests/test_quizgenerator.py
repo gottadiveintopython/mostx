@@ -19,27 +19,21 @@ def test_wrong_argument():
 def test_one_adjective():
     import random
     import mostx
-    qgen = mostx.QuizGenerator(
-        lang='japanese',
-        random_instance=random.Random(0),
-    )
+    qgen = mostx.QuizGenerator(lang='japanese', random=random.Random(0))
     q = qgen.generate(choices=range(3), n_adjectives=1)
     assert tuple(q.choices) == (0, 1, 2)
-    assert q.answer == 1
+    assert q.answer == 0
     assert tuple(q.statements) == \
-        ('1は0より遅い', '1は2より遅い', '0は2より速い')
+        ('2は0より速い', '1は0より速い', '2は1より遅い')
     assert q.question == '最も遅いのは?'
 
 
 def test_two_adjectives():
     import random
     import mostx
-    qgen = mostx.QuizGenerator(
-        lang='japanese',
-        random_instance=random.Random(100),
-    )
+    qgen = mostx.QuizGenerator(lang='japanese', random=random.Random(100))
     q = qgen.generate(choices='AB', n_adjectives=2)
     assert tuple(q.choices) == ('A', 'B')
-    assert q.answer == 'B'
-    assert tuple(q.statements) == ('AはBより大きくて低い', )
-    assert q.question == '最も高いのは?'
+    assert q.answer == 'A'
+    assert tuple(q.statements) == ('BはAより高くて大きい', )
+    assert q.question == '最も小さいのは?'
