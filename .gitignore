@@ -5,3 +5,5 @@ bin/
 /.venv/
 /temp/
 /.pytest_cache/
+*.egg-info/
+/dist/

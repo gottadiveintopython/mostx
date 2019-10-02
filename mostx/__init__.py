@@ -1,4 +1,3 @@
-__version__ = '0.1.0'
 __all__ = ('get_available_langs', 'Quiz', 'QuizGenerator', )
 import dataclasses
 from typing import Iterable, Any, Sequence

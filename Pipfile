@@ -5,6 +5,8 @@ url = "https://pypi.org/simple"
 
 [dev-packages]
 pytest = "*"
+wheel = "*"
+twine = "*"
 
 [requires]
 python_version = "3.7"
