@@ -7,3 +7,5 @@ bin/
 /.pytest_cache/
 *.egg-info/
 /dist/
+/poetry.lock
+/Pipfile.lock
