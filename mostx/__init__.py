@@ -32,7 +32,7 @@ class QuizGenerator:
     def max_adjs(self) -> int:
         return self.lang_module.get_max_adjectives()
 
-    def generate(self, *, choices:Iterable[Any], n_adjs:int) -> Quiz:
+    def __call__(self, *, choices:Iterable[Any], n_adjs:int) -> Quiz:
         import itertools
 
         choices = tuple(choices)
