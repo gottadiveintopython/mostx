@@ -1,36 +1,6 @@
 # Mostx : Quiz Generator
 
-以下のようなquizを自動で作るmodule。
-
-
-日本語の例
-
-```text
-AはBより大きい
-AはCより大きい
-BはCより小さい
-最も小さいのは？
-```
-
-中國語の例
-
-```
-B比A熱
-B比C冷
-A比C冷
-哪個最冷?
-```
-
-韓國語の例
-
-```
-B는 A보다 크다
-C는 B보다 작다
-C는 A보다 작다
-어느 것이 가장 작다?
-```
-
-英語の例
+Generates the following quiz.
 
 ```text
 B is slower than A
@@ -39,13 +9,16 @@ B is faster than C
 Which is the slowest one?
 ```
 
-## 安裝法(Installation)
+Supports multiple languages.  
+(Japanese, Korean, Traditional-Chinese, English, )
+
+## Installation
 
 ```
-pip install mostx
+pip install --pre mostx
 ```
 
-## 使用法(Usage)
+## Usage
 
 ```python
 import mostx
@@ -60,7 +33,7 @@ print(quiz)
 #     statements=[
 #         'C is larger than A',
 #         'A is smaller than B',
-#         'C is larger than B'
+#         'C is larger than B',
 #     ],
 #     question='Which is the smallest?',
 #     choices=('A', 'B', 'C'),
@@ -68,6 +41,6 @@ print(quiz)
 # )
 ```
 
-## 他
+## etc
 
-[mostx-kivy](https://github.com/gottadiveintopython/mostx-kivy)
+[Google App](https://play.google.com/store/apps/details?id=jp.gottadiveintopython.mostx) (Mostx + Kivy)
