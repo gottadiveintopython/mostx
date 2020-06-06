@@ -54,7 +54,7 @@ print(sorted(mostx.get_available_langs()))
 # => ['chinese', 'english', 'japanese', 'korean', ]
 
 qgen = mostx.QuizGenerator(lang='english')
-quiz = qgen.generate(choices='ABC', n_adjectives=1)
+quiz = qgen.generate(choices='ABC', n_adjs=1)
 print(quiz)
 # Quiz(
 #     statements=[

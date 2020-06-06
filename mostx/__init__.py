@@ -29,10 +29,10 @@ class QuizGenerator:
         return self._lang
 
     @property
-    def max_adjectives(self) -> int:
+    def max_adjs(self) -> int:
         return self.lang_module.get_max_adjectives()
 
-    def generate(self, *, choices:Iterable[Any], n_adjectives:int) -> Quiz:
+    def generate(self, *, choices:Iterable[Any], n_adjs:int) -> Quiz:
         import itertools
 
         choices = tuple(choices)
@@ -40,20 +40,20 @@ class QuizGenerator:
         if n_choices < 2:
             raise ValueError(
                 f"At least two choices are required. (was {n_choices})")
-        if n_adjectives < 1:
+        if n_adjs < 1:
             raise ValueError(
-                f"'n_adjectives' must be 1 or greater. (was {n_adjectives})")
-        if n_adjectives > self.max_adjectives:
+                f"'n_adjs' must be 1 or greater. (was {n_adjs})")
+        if n_adjs > self.max_adjs:
             raise ValueError(
-                f"'n_adjectives' must be {self.max_adjectives} or smaller. "
-                f"(was {n_adjectives})")
+                f"'n_adjs' must be {self.max_adjs} or smaller. "
+                f"(was {n_adjs})")
         lang_module = self.lang_module
         random = self.random
 
         # 無作為に選んだ形容詞それぞれにおいて順序を決定
         table = tuple(
             (index, random.sample(choices, n_choices))
-            for index in random.sample(range(self.max_adjectives), n_adjectives)
+            for index in random.sample(range(self.max_adjs), n_adjs)
         )
 
         # choicesの要素を2つ取り出す場合に有り得る組み合わせを求める
