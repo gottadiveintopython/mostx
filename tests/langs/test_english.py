@@ -1,7 +1,7 @@
 import pytest
 
 
-def test_get_max_adj():
+def test_get_max_adjectives():
     from mostx.langs.english import get_max_adjectives
     assert get_max_adjectives() >= 1
 
