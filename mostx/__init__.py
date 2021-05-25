@@ -1,5 +1,7 @@
 __all__ = ('get_available_langs', 'MostxQuiz', 'QuizGenerator', )
-import dataclasses
+import itertools
+import random as random_module
+from dataclasses import dataclass
 from typing import Iterable, Any, Sequence
 
 
@@ -7,7 +9,7 @@ def get_available_langs() -> Iterable[str]:
     return ('japanese', 'korean', 'chinese', 'english', )
 
 
-@dataclasses.dataclass
+@dataclass
 class MostxQuiz:
     statements: Sequence[str]
     question: str
@@ -17,12 +19,11 @@ class MostxQuiz:
 
 class QuizGenerator:
 
-    def __init__(self, *, lang: str, random=None):
+    def __init__(self, *, lang='english', random=random_module):
         import importlib
-        import random as random_module
         self.lang_module = importlib.import_module('mostx.langs.' + lang)
         self._lang = lang
-        self.random = random or random_module
+        self.random = random
 
     @property
     def lang(self) -> str:
@@ -33,8 +34,6 @@ class QuizGenerator:
         return self.lang_module.get_max_adjectives()
 
     def __call__(self, *, choices: Iterable[Any], n_adjs: int) -> MostxQuiz:
-        import itertools
-
         choices = tuple(choices)
         n_choices = len(choices)
         if n_choices < 2:
@@ -65,7 +64,7 @@ class QuizGenerator:
         # 定義文(例: AはBより大きい)を生成
         statements = []
         for combination in combinations:
-            a, b = combination[0], combination[1],
+            a, b = combination
             adjpart_arg = [
                 (index, order.index(a) < order.index(b), )
                 for (index, order) in table
