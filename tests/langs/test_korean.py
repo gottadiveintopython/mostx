@@ -17,3 +17,8 @@ def test_generate_mostx_question():
     assert '어느 것이 가장 작다?' == gq(0, True)
     assert '어느 것이 가장 크다?' == gq(0, False)
     assert '어느 것이 가장 조용하다?' == gq(9, True)
+
+
+def test_generate_sort_request():
+    from mostx.langs.korean import generate_sort_request as gsc
+    assert '크은 것부터 작 것까지 순서대로 나열하다' == gsc(0, False)

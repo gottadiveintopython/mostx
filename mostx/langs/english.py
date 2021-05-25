@@ -1,7 +1,7 @@
 __all__ = (
     'get_max_adjectives', 'generate_statement', 'generate_mostx_question',
+    'generate_sort_request',
 )
-
 
 ADJ_TEXT = '''
 small/larg long/short cold/hott new/old fast/slow near/farth hard/soft
@@ -33,3 +33,10 @@ def generate_mostx_question(index, is_fwd_direction):
     return r'Which is the {}est?'.format(
         ADJS[index][0 if is_fwd_direction else 1]
     )
+
+
+def generate_sort_request(index, is_fwd_direction):
+    adj = ADJS[index]
+    if not is_fwd_direction:
+        adj = reversed(adj)
+    return r'Put from {}est to {}est'.format(*adj)

@@ -17,3 +17,9 @@ def test_generate_mostx_question():
     assert '最も熱いのは?' == gq(0, True)
     assert '最も冷たいのは?' == gq(0, False)
     assert '最も堅いのは?' == gq(9, True)
+
+def test_generate_sort_request():
+    from mostx.langs.japanese import generate_sort_request as gsc
+    assert '熱い順に並べ替えよ' == gsc(0, True)
+    assert '冷たい順に並べ替えよ' == gsc(0, False)
+    assert '堅い順に並べ替えよ' == gsc(9, True)

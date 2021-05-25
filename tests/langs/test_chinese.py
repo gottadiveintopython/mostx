@@ -17,3 +17,10 @@ def test_generate_mostx_question():
     assert '哪個最快?' == gq(0, True)
     assert '哪個最慢?' == gq(0, False)
     assert '哪個最大?' == gq(9, True)
+
+
+def test_generate_sort_request():
+    from mostx.langs.chinese import generate_sort_request as gsc
+    assert '由快到慢排列' == gsc(0, True)
+    assert '由慢到快排列' == gsc(0, False)
+    assert '由大到小排列' == gsc(9, True)

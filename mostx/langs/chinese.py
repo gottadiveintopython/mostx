@@ -1,5 +1,6 @@
 __all__ = (
     'get_max_adjectives', 'generate_statement', 'generate_mostx_question',
+    'generate_sort_request',
 )
 
 
@@ -29,3 +30,10 @@ def generate_statement(a, b, adjpart):
 
 def generate_mostx_question(index, is_fwd_direction):
     return f'哪個最{ADJS[index][0 if is_fwd_direction else 1]}?'
+
+
+def generate_sort_request(index, is_fwd_direction):
+    adj = ADJS[index]
+    if not is_fwd_direction:
+        adj = reversed(adj)
+    return r'由{}到{}排列'.format(*adj)

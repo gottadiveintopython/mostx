@@ -19,3 +19,10 @@ def test_generate_mostx_question():
     assert 'Which is the smallest?' == gq(0, True)
     assert 'Which is the largest?' == gq(0, False)
     assert 'Which is the quietest?' == gq(9, True)
+
+
+def test_generate_sort_request():
+    from mostx.langs.english import generate_sort_request as gsc
+    assert 'Put from smallest to largest' == gsc(0, True)
+    assert 'Put from largest to smallest' == gsc(0, False)
+    assert 'Put from quietest to noisiest' == gsc(9, True)

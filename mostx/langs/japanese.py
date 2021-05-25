@@ -1,5 +1,6 @@
 __all__ = (
     'get_max_adjectives', 'generate_statement', 'generate_mostx_question',
+    'generate_sort_request',
 )
 
 from typing import Tuple, Iterable
@@ -33,3 +34,10 @@ def generate_mostx_question(index, is_fwd_direction):
     「最も大きのは？」といった感じの質問文を作る。
     '''
     return '最も{}いのは?'.format(ADJS[index][0 if is_fwd_direction else 1])
+
+
+def generate_sort_request(index, is_fwd_direction):
+    '''
+    「小さい順に並べ替えよ」といった感じの命令文を作る。
+    '''
+    return '{}い順に並べ替えよ'.format(ADJS[index][0 if is_fwd_direction else 1])
