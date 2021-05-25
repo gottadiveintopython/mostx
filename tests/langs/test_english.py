@@ -17,8 +17,8 @@ def test_generate_statement():
         gs('湯唯', 'A', [(5, True), (9, False), (1, False)])
 
 
-def test_generate_question():
-    from mostx.langs.english import generate_question as gq
+def test_generate_mostx_question():
+    from mostx.langs.english import generate_mostx_question as gq
     assert 'Which is the smallest?' == gq(0, True)
     assert 'Which is the largest?' == gq(0, False)
     assert 'Which is the quietest?' == gq(9, True)

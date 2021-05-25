@@ -15,8 +15,8 @@ def test_generate_statement():
     assert '湯唯는 A보다 가늘고 시끄럽다' == gs('湯唯', 'A', [(5, True), (9, False)])
 
 
-def test_generate_question():
-    from mostx.langs.korean import generate_question as gq
+def test_generate_mostx_question():
+    from mostx.langs.korean import generate_mostx_question as gq
     assert '어느 것이 가장 작다?' == gq(0, True)
     assert '어느 것이 가장 크다?' == gq(0, False)
     assert '어느 것이 가장 조용하다?' == gq(9, True)

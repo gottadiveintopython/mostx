@@ -1,4 +1,6 @@
-__all__ = ('get_max_adjectives', 'generate_statement', 'generate_question', )
+__all__ = (
+    'get_max_adjectives', 'generate_statement', 'generate_mostx_question',
+)
 
 
 ADJ_TEXT = '''
@@ -21,7 +23,7 @@ def generate_statement(a, b, adjpart):
     )
 
 
-def generate_question(index, is_fwd_direction):
+def generate_mostx_question(index, is_fwd_direction):
     return '어느 것이 가장 {}다?'.format(
         ADJS[index][0 if is_fwd_direction else 1]
     )

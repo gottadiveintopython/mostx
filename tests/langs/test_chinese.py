@@ -15,8 +15,8 @@ def test_generate_statement():
     assert '湯唯比A又細又小' == gs('湯唯', 'A', [(5, True), (9, False)])
 
 
-def test_generate_question():
-    from mostx.langs.chinese import generate_question as gq
+def test_generate_mostx_question():
+    from mostx.langs.chinese import generate_mostx_question as gq
     assert '哪個最快?' == gq(0, True)
     assert '哪個最慢?' == gq(0, False)
     assert '哪個最大?' == gq(9, True)

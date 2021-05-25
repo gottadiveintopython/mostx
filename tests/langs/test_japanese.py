@@ -15,8 +15,8 @@ def test_generate_statement():
     assert '湯唯はAより美しくて柔らかい' == gs('湯唯', 'A', [(5, True), (9, False)])
 
 
-def test_generate_question():
-    from mostx.langs.japanese import generate_question as gq
+def test_generate_mostx_question():
+    from mostx.langs.japanese import generate_mostx_question as gq
     assert '最も熱いのは?' == gq(0, True)
     assert '最も冷たいのは?' == gq(0, False)
     assert '最も堅いのは?' == gq(9, True)

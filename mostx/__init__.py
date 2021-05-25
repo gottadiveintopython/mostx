@@ -1,4 +1,4 @@
-__all__ = ('get_available_langs', 'Quiz', 'QuizGenerator', )
+__all__ = ('get_available_langs', 'MostxQuiz', 'QuizGenerator', )
 import dataclasses
 from typing import Iterable, Any, Sequence
 
@@ -8,7 +8,7 @@ def get_available_langs() -> Iterable[str]:
 
 
 @dataclasses.dataclass
-class Quiz:
+class MostxQuiz:
     statements: Sequence[str]
     question: str
     choices: Sequence[Any]
@@ -32,7 +32,7 @@ class QuizGenerator:
     def max_adjs(self) -> int:
         return self.lang_module.get_max_adjectives()
 
-    def __call__(self, *, choices: Iterable[Any], n_adjs: int) -> Quiz:
+    def __call__(self, *, choices: Iterable[Any], n_adjs: int) -> MostxQuiz:
         import itertools
 
         choices = tuple(choices)
@@ -77,9 +77,10 @@ class QuizGenerator:
         # 問題の答えを決めて、質問文(例: 最も大きのは？)を生成
         index, order = random.choice(table)
         answer_index = random.choice([0, -1])
-        return Quiz(
+        return MostxQuiz(
             statements=statements,
-            question=lang_module.generate_question(index, answer_index == 0),
+            question=lang_module.generate_mostx_question(
+                index, answer_index == 0),
             answer=order[answer_index],
             choices=choices,
         )
