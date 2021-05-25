@@ -17,7 +17,7 @@ class Quiz:
 
 class QuizGenerator:
 
-    def __init__(self, *, lang:str, random=None):
+    def __init__(self, *, lang: str, random=None):
         import importlib
         import random as random_module
         self.lang_module = importlib.import_module('mostx.langs.' + lang)
@@ -32,7 +32,7 @@ class QuizGenerator:
     def max_adjs(self) -> int:
         return self.lang_module.get_max_adjectives()
 
-    def __call__(self, *, choices:Iterable[Any], n_adjs:int) -> Quiz:
+    def __call__(self, *, choices: Iterable[Any], n_adjs: int) -> Quiz:
         import itertools
 
         choices = tuple(choices)
@@ -66,9 +66,13 @@ class QuizGenerator:
         statements = []
         for combination in combinations:
             a, b = combination[0], combination[1],
-            adjpart_arg = [(index, order.index(a) < order.index(b),) for (index, order) in table]
+            adjpart_arg = [
+                (index, order.index(a) < order.index(b), )
+                for (index, order) in table
+            ]
             random.shuffle(adjpart_arg)
-            statements.append(lang_module.generate_statement(a, b, adjpart_arg))
+            statements.append(lang_module.generate_statement(
+                a, b, adjpart_arg))
 
         # 問題の答えを決めて、質問文(例: 最も大きのは？)を生成
         index, order = random.choice(table)

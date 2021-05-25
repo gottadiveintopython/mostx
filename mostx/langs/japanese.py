@@ -15,8 +15,8 @@ def get_max_adjectives():
 def generate_statement(a, b, adjpart):
     return '{}は{}より{}い'.format(
         a, b, 'くて'.join(
-            [ADJS[index][0 if is_fwd_direction else 1]
-            for (index, is_fwd_direction) in adjpart]
+            ADJS[index][0 if is_fwd_direction else 1]
+            for (index, is_fwd_direction) in adjpart
         )
     )
 
