@@ -43,7 +43,15 @@ class QuizGenerator:
     def max_adjs(self) -> int:
         return self.lang_module.get_max_adjectives()
 
-    def __call__(self, *, choices: Iterable[Any], n_adjs: int) -> MostxQuiz:
+    def __call__(self, *args, **kwargs) -> MostxQuiz:
+        import warnings
+        warnings.warn(
+            r"'QuizGenerator.__call__()' is deprecated, "
+            r"use 'QuizGenerator.gen_mostx_quiz()' instead.")
+        return self.gen_mostx_quiz(*args, **kwargs)
+
+    def gen_mostx_quiz(self, *, choices: Iterable[Any], n_adjs: int) \
+            -> MostxQuiz:
         choices = tuple(choices)
         n_choices = len(choices)
         if n_choices < 2:
