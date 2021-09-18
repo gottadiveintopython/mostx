@@ -1,11 +1,9 @@
 PYTHON = python
-PYTEST = $(PYTHON) -m pytest
 
 test:
-	$(PYTEST) ./tests
+	$(PYTHON) -m pytest ./tests
 
-style:
-	$(PYTHON) -m flake8 ./mostx
+type:
+	$(PYTHON) -m mypy --strict ./mostx
 
-mypy:
-	$(PYTHON) -m mypy ./mostx
+all: type test

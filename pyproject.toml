@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mostx"
-version = "0.2.0dev"
+version = "0.2.0.dev0"
 description = "Quiz Generator"
 authors = ["Nattōsai Mitō <flow4re2c@gmail.com>"]
 license = "MIT"
@@ -21,11 +21,10 @@ classifiers=[
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.4.3"
-flake8 = "^3.9.2"
 mypy = "^0.910"
 
 [build-system]

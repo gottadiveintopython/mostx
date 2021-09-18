@@ -1,7 +1,7 @@
 __all__ = (
     'PAdjIdx', 'AdjMat', 'Choice', 'Translator', 'MostxQuiz', 'SortQuiz',
 )
-from typing import Protocol, Iterable, Tuple, NewType, Any, Sequence
+from typing import Protocol, List, Tuple, NewType, Any, Sequence
 from dataclasses import dataclass
 
 
@@ -27,12 +27,12 @@ Choice = Any
 
 class Translator(Protocol):
     @property
-    def get_max_adjs(self) -> int:
+    def max_adjs(self) -> int:
         '''
         一つの定義文の中で利用可能な形容詞の最大数。``PAdjIdx``の値はこの値未満である必要がある。
         '''
 
-    def gen_statement(self, a: Choice, b: Choice, adjmats: Iterable[AdjMat], /) -> str:
+    def gen_statement(self, a: Choice, b: Choice, adjmats: List[AdjMat]) -> str:
         '''
         「AはBより熱くて遠い」といった感じの定義文を作る。
         '''

@@ -4,10 +4,10 @@ from typing import List
 from ..datatypes import AdjMat, Choice, Translator as TranslatorProtocol
 
 PADJ_TEXT = '''
-熱/冷た 厚/薄 大き/小さ 新し/古 鋭/鈍 美し/醜 近/遠 高/低 細/太 堅/柔らか
-易し/難し 明る/暗 強/弱 速/遅 優し/厳し
+작/크 적/많 짧/길 가볍/무겁 좁/넓 가늘/굵 가깝/멀 춥/덥
+쉽/어렵 조용하/시끄럽 예쁘/더럽 맛있/맛없
 '''
-PADJS = tuple(tuple(i.split(sep='/', maxsplit=1)) for i in PADJ_TEXT.split())
+PADJS = [i.split(sep='/', maxsplit=1) for i in PADJ_TEXT.split()]
 
 
 class Translator(TranslatorProtocol):
@@ -16,8 +16,8 @@ class Translator(TranslatorProtocol):
         return len(PADJS)
 
     def gen_statement(self, a: Choice, b: Choice, adjmats: List[AdjMat]) -> str:
-        return '{}は{}より{}い'.format(
-            a, b, 'くて'.join(
+        return '{}는 {}보다 {}다'.format(
+            a, b, '고 '.join(
                 PADJS[idx][is_fwd]
                 for (idx, is_fwd) in adjmats
             )
@@ -25,8 +25,11 @@ class Translator(TranslatorProtocol):
 
     def gen_mostx_question(self, adjmat: AdjMat) -> str:
         idx, is_fwd = adjmat
-        return '最も{}いのは?'.format(PADJS[idx][is_fwd])
+        return f'어느 것이 가장 {PADJS[idx][is_fwd]}다?'
 
     def gen_sort_request(self, adjmat: AdjMat) -> str:
         idx, is_fwd = adjmat
-        return '{}い順に並べ替えよ'.format(PADJS[idx][is_fwd])
+        from_, to_ = PADJS[idx]
+        if is_fwd:
+            from_, to_ = to_, from_
+        return f'{from_}은 것부터 {to_} 것까지 순서대로 나열하다'
