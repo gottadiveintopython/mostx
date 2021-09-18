@@ -6,3 +6,6 @@ test:
 
 style:
 	$(PYTHON) -m flake8 ./mostx
+
+mypy:
+	$(PYTHON) -m mypy ./mostx
