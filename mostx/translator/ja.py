@@ -5,7 +5,7 @@ from ..datatypes import AdjMat, Choice, Translator as TranslatorProtocol
 
 PADJ_TEXT = '''
 熱/冷た 厚/薄 大き/小さ 新し/古 鋭/鈍 美し/醜 近/遠 高/低 細/太 堅/柔らか
-易し/難し 明る/暗 強/弱 速/遅 優し/厳し
+易し/難し 明る/暗 強/弱 速/遅 優し/厳し 楽し/悲し
 '''
 PADJS = tuple(tuple(i.split(sep='/', maxsplit=1)) for i in PADJ_TEXT.split())
 

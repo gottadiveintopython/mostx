@@ -98,53 +98,45 @@ class QuizGenerator:
         )
 
     def gen_sort_quiz(self, *, choices: Iterable[Choice], n_adjs: int) -> SortQuiz:
+        # same as gen_mostx_quiz's
         choices = tuple(choices)
         n_choices = len(choices)
-        if n_choices < 3:
-            raise ValueError(
-                f"At least three choices are required. (was {n_choices})")
+        if n_choices < 2:
+            raise ValueError(f"At least two choices are required. (was {n_choices})")
         if n_adjs < 1:
-            raise ValueError(
-                f"'n_adjs' must be 1 or greater. (was {n_adjs})")
+            raise ValueError(f"'n_adjs' must be 1 or greater. (was {n_adjs})")
         if n_adjs > self.max_adjs:
-            raise ValueError(
-                f"'n_adjs' must be {self.max_adjs} or smaller. "
-                f"(was {n_adjs})")
-        translator = self.translator
-        random = self.random
+            raise ValueError(f"'n_adjs' must be {self.max_adjs} or smaller. (was {n_adjs})")
+        translator = self._translator
+        random = self._random
 
-        # 無作為に選んだ形容詞それぞれにおいて順序を決定
+        # same as gen_mostx_quiz's
         table = tuple(
-            (adj_idx, random.sample(choices, n_choices))
-            for adj_idx in random.sample(range(self.max_adjs), n_adjs)
+            (adjp_idx, random.sample(choices, n_choices))
+            for adjp_idx in random.sample(range(self.max_adjs), n_adjs)
         )
-
-        # choicesの要素を2つ取り出す場合に有り得る組み合わせを求める
         combinations = [
             random.sample(c, 2)
             for c in itertools.combinations(choices, 2)
         ]
         random.shuffle(combinations)
-
-        # 定義文(例: AはBより大きい)を生成
-        statements = []
-        for combination in combinations:
-            a, b = combination
-            adjmats = [
-                (adj_idx, order.index(a) < order.index(b), )
-                for adj_idx, order in table
-            ]
-            random.shuffle(adjmats)
-            statements.append(translator.generate_statement(
-                a, b, adjmats))
+        statements = tuple(
+            (
+                adjmats := [
+                    (adjp_idx, order.index(a) < order.index(b), )
+                    for (adjp_idx, order) in table
+                ],
+                random.shuffle(adjmats),
+            ) and translator.gen_statement(a, b, adjmats)
+            for a, b in combinations
+        )
 
         # 問題の答えを決めてから命令文(例: 小さい順に並べ替えよ)を生成
         adj_idx, order = random.choice(table)
-        is_fwd_direction = random.random() > 0.5
+        is_fwd = random.choice((True, False))
         return SortQuiz(
             statements=statements,
-            request=translator.generate_sort_request(
-                adj_idx, is_fwd_direction),
-            answer=(order if is_fwd_direction else tuple(reversed(order))),
+            request=translator.gen_sort_request((adj_idx, is_fwd)),
+            answer=order if is_fwd else reversed(order),
             choices=choices,
         )
