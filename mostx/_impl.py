@@ -13,15 +13,15 @@ def get_available_langs() -> Iterable[str]:
 
 
 @lru_cache(maxsize=None)
-def get_translator(lang: str) -> Translator:
+def load_translator(lang: str) -> Translator:
     import importlib
-    return importlib.import_module('mostx.translator.' + lang).Translator()
+    return importlib.import_module('mostx.translator.' + lang).Translator()  # type: ignore
 
 
 class QuizGenerator:
-    def __init__(self, *, lang='en', random=random_module):
-        self._lang = lang
-        self._translator = get_translator(lang)
+    def __init__(self, *, lang='en', random=random_module):  # type: ignore
+        self._lang: str = lang
+        self._translator = load_translator(lang)
         self._random = random
 
     @property
@@ -134,9 +134,11 @@ class QuizGenerator:
         # 問題の答えを決めてから命令文(例: 小さい順に並べ替えよ)を生成
         adj_idx, order = random.choice(table)
         is_fwd = random.choice((True, False))
+        if not is_fwd:
+            order.reverse()
         return SortQuiz(
             statements=statements,
             request=translator.gen_sort_request((adj_idx, is_fwd)),
-            answer=order if is_fwd else reversed(order),
+            answer=order,
             choices=choices,
         )

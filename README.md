@@ -16,13 +16,13 @@ B is faster than C
 Put from slowest to fastest
 ```
 
-Supports multiple languages.  
+Supports the following languages.  
 (Japanese, Korean, Traditional-Chinese, English, )
 
 ## Installation
 
 ```
-pip install mostx
+pip install https://github.com/gottadiveintopython/mostx.git#egg=mostx
 ```
 
 ## Usage
@@ -31,9 +31,9 @@ pip install mostx
 import mostx
 
 print(sorted(mostx.get_available_langs()))
-# => ['chinese', 'english', 'japanese', 'korean', ]
+# => ['en', 'ja', 'ko', 'zh']
 
-qgen = mostx.QuizGenerator(lang='english')
+qgen = mostx.QuizGenerator(lang='en')
 quiz = qgen.gen_mostx_quiz(choices='ABC', n_adjs=1)
 print(quiz)
 # MostxQuiz(
