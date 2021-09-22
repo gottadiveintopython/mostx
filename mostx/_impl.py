@@ -1,7 +1,7 @@
 __all__ = ('get_available_langs', 'QuizGenerator', )
 import itertools
 from functools import lru_cache
-from typing import Iterable
+from typing import Iterable, Optional
 import random as random_module
 from .datatypes import SortQuiz, MostxQuiz, Translator, Choice
 
@@ -14,15 +14,16 @@ def get_available_langs() -> Iterable[str]:
 
 @lru_cache(maxsize=None)
 def load_translator(lang: str) -> Translator:
+    '''(internal)'''
     import importlib
     return importlib.import_module('mostx.translator.' + lang).Translator()  # type: ignore
 
 
 class QuizGenerator:
-    def __init__(self, *, lang='en', random=random_module):  # type: ignore
+    def __init__(self, *, lang: str='en', random: Optional[random_module.Random]=None):
         self._lang: str = lang
-        self._translator = load_translator(lang)
-        self._random = random
+        self._translator: Translator = load_translator(lang)
+        self._random: random_module.Random = random_module if random is None else random  # type: ignore
 
     @property
     def lang(self) -> str:
@@ -82,7 +83,7 @@ class QuizGenerator:
                     (adjp_idx, order.index(a) < order.index(b), )
                     for (adjp_idx, order) in table
                 ],
-                random.shuffle(adjmats),
+                random.shuffle(adjmats),  # type: ignore
             ) and translator.gen_statement(a, b, adjmats)
             for a, b in combinations
         )
@@ -126,7 +127,7 @@ class QuizGenerator:
                     (adjp_idx, order.index(a) < order.index(b), )
                     for (adjp_idx, order) in table
                 ],
-                random.shuffle(adjmats),
+                random.shuffle(adjmats),  # type: ignore
             ) and translator.gen_statement(a, b, adjmats)
             for a, b in combinations
         )

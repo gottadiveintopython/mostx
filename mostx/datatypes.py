@@ -5,7 +5,7 @@ from typing import Protocol, List, Tuple, NewType, Any, Sequence
 from dataclasses import dataclass
 
 
-PAdjIdx = NewType('PAdjIdx', int)
+PAdjIdx = int
 '''
 'PAdj' stands for paired-adjectives.
 PAdjは「大きい/小さい」のような対になった反対の意味の形容詞を意味する。

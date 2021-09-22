@@ -16,8 +16,26 @@ B is faster than C
 Put from slowest to fastest
 ```
 
-Supports the following languages.  
-(Japanese, Korean, Traditional-Chinese, English, )
+Supported languages: Japanese, Korean, Traditional-Chinese and English  
+WARNING: I'm only fluent in Japanese.
+The output may be incorrect when you choose the other languages.
+
+```text
+A比B又容易又薄
+C比A又容易又厚
+B比C又難又薄
+由薄到厚排列
+
+A는 C보다 크다
+B는 C보다 크다
+B는 A보다 크다
+크은 것부터 작 것까지 순서대로 나열하다
+
+CはAより高くて古くて遅い
+CはBより遅くて低くて新しい
+BはAより速くて高くて古い
+最も低いのは?
+```
 
 ## Installation
 

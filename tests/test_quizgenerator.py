@@ -4,7 +4,7 @@ import pytest
 def qgen():
     import random
     from mostx import QuizGenerator
-    return QuizGenerator(lang='ja', random=random.Random(0))
+    return QuizGenerator(lang='ja', random=random.Random(20210900))
 
 
 def test_wrong_argument(qgen):

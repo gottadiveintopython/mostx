@@ -10,9 +10,6 @@ def main():
     print("OK! Game Start!")
     time.sleep(.2)
     while True:
-        #------------
-        # SortQuiz
-        #------------
         print("\n")
         quiz = qgen.gen_sort_quiz(choices='ABC', n_adjs=random.choice([1, 2]))
         print('\n'.join(quiz.statements))
